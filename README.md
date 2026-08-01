@@ -87,3 +87,45 @@ The application follows a **3-tier architecture**:
 - **Data Layer:** SQL Server with Dapper ORM
 
 ---
+# 📂 Project Structure
+
+```text
+Enterprise-Inventory-Management-System/
+│
+├── Assets/
+│   └── banner.png
+│
+├── Screenshot/
+│   ├── 01-Login.png
+│   ├── 02-Dashboard.png
+│   ├── 03-Categories.png
+│   ├── 04-Add-Category.png
+│   ├── 05-Products.png
+│   ├── 06-Add-Product.png
+│   ├── 07-Suppliers.png
+│   ├── 08-Add-Supplier.png
+│   ├── 09-Stock-In.png
+│   ├── 10-Stock-Out.png
+│   ├── 11-Transactions.png
+│   ├── 12-Reports.png
+│   ├── 13-Swagger.png
+│   └── 14-Database.png
+│
+├── backend/
+│   └── InventoryManagementSystem/
+│       ├── Controllers/
+│       ├── Models/
+│       ├── DTOs/
+│       ├── Repositories/
+│       ├── Program.cs
+│       ├── appsettings.json
+│       └── InventoryManagementSystem.csproj
+│
+├── app.js
+├── index.html
+├── styles.css
+├── README.md
+└── .gitignore
+```
+
+---
