@@ -30,3 +30,21 @@ A Full-Stack Inventory Management Web Application built using HTML, CSS, Bootstr
 Enterprise Inventory Management System is a full-stack web application developed to efficiently manage inventory operations for businesses. The system provides secure authentication, product management, category management, supplier management, stock tracking, transaction history, reports, and dashboard analytics using a modern ASP.NET Core Web API backend and Microsoft SQL Server database.
 
 ---
+# ✨ Features
+
+- 🔐 Secure User Authentication
+- 📊 Interactive Dashboard with Inventory Statistics
+- 📦 Product Management (CRUD)
+- 🗂️ Category Management (CRUD)
+- 🚚 Supplier Management (CRUD)
+- 📥 Stock In Management
+- 📤 Stock Out Management
+- 📝 Inventory Transaction History
+- 📈 Reports & Analytics
+- 🔍 Search & Filter Functionality
+- 🗄️ Microsoft SQL Server Database Integration
+- ⚡ RESTful ASP.NET Core Web API
+- 💾 Dapper ORM for High-Performance Database Access
+- 📱 Responsive User Interface using Bootstrap 5
+
+---
