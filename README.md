@@ -129,3 +129,25 @@ Enterprise-Inventory-Management-System/
 ```
 
 ---
+# 🗄️ Database Design
+
+The project uses **Microsoft SQL Server** as the relational database.
+
+### Database Tables
+
+| Table | Description |
+|-------|-------------|
+| Users | Stores user login credentials and roles |
+| Categories | Stores product categories |
+| Products | Stores product details and stock information |
+| Suppliers | Stores supplier information |
+| InventoryTransactions | Stores Stock In and Stock Out transaction history |
+
+### Database Relationships
+
+- One **Category** can have multiple **Products**.
+- One **Supplier** can supply multiple **Products**.
+- One **Product** can have multiple **Inventory Transactions**.
+- Each transaction records Stock In or Stock Out activity.
+
+---
