@@ -48,3 +48,16 @@ Enterprise Inventory Management System is a full-stack web application developed
 - 📱 Responsive User Interface using Bootstrap 5
 
 ---
+# 🛠️ Technology Stack
+
+| Layer | Technology |
+|--------|------------|
+| Frontend | HTML5, CSS3, Bootstrap 5, JavaScript (ES6) |
+| Backend | ASP.NET Core Web API (.NET 8), C# |
+| Database | Microsoft SQL Server |
+| ORM | Dapper |
+| API Testing | Swagger (OpenAPI) |
+| Version Control | Git & GitHub |
+| IDE | Visual Studio 2022, Visual Studio Code |
+
+---
