@@ -61,3 +61,29 @@ Enterprise Inventory Management System is a full-stack web application developed
 | IDE | Visual Studio 2022, Visual Studio Code |
 
 ---
+# 🏗️ System Architecture
+
+```text
+                   User
+                     │
+                     ▼
+        HTML • CSS • Bootstrap • JavaScript
+                     │
+              Fetch API (HTTP)
+                     │
+                     ▼
+          ASP.NET Core Web API (.NET 8)
+                     │
+          Repository Pattern (Dapper)
+                     │
+                     ▼
+           Microsoft SQL Server
+```
+
+The application follows a **3-tier architecture**:
+
+- **Presentation Layer:** HTML, CSS, Bootstrap, JavaScript
+- **Business Logic Layer:** ASP.NET Core Web API (C#)
+- **Data Layer:** SQL Server with Dapper ORM
+
+---
