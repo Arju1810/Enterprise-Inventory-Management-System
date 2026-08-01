@@ -243,3 +243,50 @@ The backend is built using **ASP.NET Core Web API** and exposes RESTful endpoint
 ![Database](Screenshot/Database.png)
 
 ---
+# ⚙️ Installation Guide
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Arju1810/Enterprise-Inventory-Management-System.git
+```
+
+## 2️⃣ Open the Project
+
+Open the project in **Visual Studio Code** and **Visual Studio 2022**.
+
+## 3️⃣ Configure SQL Server
+
+- Open SQL Server Management Studio (SSMS)
+- Create a database named **InventoryDB**
+- Execute the **Database.sql** script
+
+## 4️⃣ Configure Connection String
+
+Update `appsettings.json`:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=YOUR_SERVER;Database=InventoryDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
+}
+```
+
+## 5️⃣ Run Backend
+
+Open the ASP.NET Core project and press **F5**.
+
+Swagger will open:
+
+```
+https://localhost:7119/swagger
+```
+
+## 6️⃣ Run Frontend
+
+Open `index.html` using **Live Server**.
+
+The application will connect to the backend automatically.
+
+---
