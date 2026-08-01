@@ -290,3 +290,22 @@ Open `index.html` using **Live Server**.
 The application will connect to the backend automatically.
 
 ---
+# 👨‍💻 Developer
+
+**Arju Shaikh**
+
+- 🎓 B.Sc. Computer Science Student
+- 💻 Aspiring Software Developer & Data Analyst
+- 🌐 GitHub: https://github.com/Arju1810
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a **⭐ Star** on GitHub.
+
+---
+
+## 📄 License
+
+This project is developed for **educational and portfolio purposes**.
