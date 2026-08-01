@@ -176,3 +176,70 @@ The backend is built using **ASP.NET Core Web API** and exposes RESTful endpoint
 | GET | `/api/Inventory/transactions` | Get transaction history |
 
 ---
+# 📸 Project Screenshots
+
+## 🔐 Login Page
+
+![Login](Screenshot/01-Login.png)
+
+---
+
+## 📊 Dashboard
+
+![Dashboard](Screenshot/02-Dashboard.png)
+
+---
+
+## 🗂️ Categories
+
+![Categories](Screenshot/03-Categories.png)
+
+---
+
+## 📦 Products
+
+![Products](Screenshot/05-Products.png)
+
+---
+
+## 🚚 Suppliers
+
+![Suppliers](Screenshot/07-Suppliers.png)
+
+---
+
+## 📥 Stock In
+
+![Stock In](Screenshot/09-Stock-In.png)
+
+---
+
+## 📤 Stock Out
+
+![Stock Out](Screenshot/10-Stock-Out.png)
+
+---
+
+## 📝 Transactions
+
+![Transactions](Screenshot/11-Transactions.png)
+
+---
+
+## 📈 Reports
+
+![Reports](Screenshot/12-Reports.png)
+
+---
+
+## 🔌 Swagger API
+
+![Swagger](Screenshot/13-Swagger.png)
+
+---
+
+## 🗄️ SQL Server Database
+
+![Database](Screenshot/14-Database.png)
+
+---
