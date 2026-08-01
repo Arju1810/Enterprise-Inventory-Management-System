@@ -151,3 +151,28 @@ The project uses **Microsoft SQL Server** as the relational database.
 - Each transaction records Stock In or Stock Out activity.
 
 ---
+# 🔌 REST API Endpoints
+
+The backend is built using **ASP.NET Core Web API** and exposes RESTful endpoints for inventory operations.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/Auth/login` | Authenticate user |
+| GET | `/api/Inventory/dashboard` | Get dashboard statistics |
+| GET | `/api/Inventory/categories` | Get all categories |
+| POST | `/api/Inventory/categories` | Add a category |
+| PUT | `/api/Inventory/categories/{id}` | Update a category |
+| DELETE | `/api/Inventory/categories/{id}` | Delete a category |
+| GET | `/api/Inventory/products` | Get all products |
+| POST | `/api/Inventory/products` | Add a product |
+| PUT | `/api/Inventory/products/{id}` | Update a product |
+| DELETE | `/api/Inventory/products/{id}` | Delete a product |
+| GET | `/api/Inventory/suppliers` | Get all suppliers |
+| POST | `/api/Inventory/suppliers` | Add a supplier |
+| PUT | `/api/Inventory/suppliers/{id}` | Update a supplier |
+| DELETE | `/api/Inventory/suppliers/{id}` | Delete a supplier |
+| POST | `/api/Inventory/stock-in` | Add stock |
+| POST | `/api/Inventory/stock-out` | Remove stock |
+| GET | `/api/Inventory/transactions` | Get transaction history |
+
+---
