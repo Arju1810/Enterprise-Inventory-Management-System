@@ -195,7 +195,36 @@ let suppliers = [];
 let products = [];
 let transactions = [];
 let currentUser = JSON.parse(localStorage.getItem('ims_user')) || null;
+function isDemoUser() {
+    return currentUser && currentUser.role === "Demo";
+}
 
+function enableDemoMode() {
+
+    document.querySelectorAll(".btn-add").forEach(btn => {
+        btn.style.display = "none";
+    });
+
+    document.querySelectorAll(".btn-edit").forEach(btn => {
+        btn.style.display = "none";
+    });
+
+    document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.style.display = "none";
+    });
+
+    setTimeout(() => {
+        document.querySelectorAll(".demo-hide").forEach(item => {
+            item.style.display = "none";
+        });
+    }, 300);
+
+    showToast(
+        "Demo Mode",
+        "You are logged in as a Demo User. Editing features are disabled.",
+        "info"
+    );
+}
 // Global state variables
 let activeView = 'dashboard';
 
@@ -232,6 +261,8 @@ document.getElementById('login-form').addEventListener('submit', async function 
         }
 
         const user = await response.json();
+        console.log("API Response:", user);
+        console.log("Role:", user.role);
 
         currentUser = {
             userID: user.userID,
@@ -240,6 +271,9 @@ document.getElementById('login-form').addEventListener('submit', async function 
             email: user.email,
             avatar: user.username.charAt(0).toUpperCase()
         };
+        if (currentUser.role === "Demo") {
+            enableDemoMode();
+        }
 
         // Save login session
         localStorage.setItem('ims_user', JSON.stringify(currentUser));
@@ -383,9 +417,22 @@ function renderCategoriesTable() {
             <td class="fw-bold">${cat.name}</td>
             <td class="text-muted">${cat.description || 'N/A'}</td>
             <td class="text-end">
-                <button class="btn btn-sm btn-outline-secondary me-1" onclick="openCategoryModal(${cat.id})" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory(${cat.id})" title="Delete"><i class="fa-solid fa-trash"></i></button>
-            </td>
+    ${
+            isDemoUser()
+                ? ''
+                : `
+        <button class="btn btn-sm btn-outline-secondary me-1"
+                onclick="openCategoryModal(${c.id})">
+            <i class="fa-solid fa-pen"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-danger"
+                onclick="deleteCategory(${c.id})">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+        `
+    }
+</td>
         `;
         tbody.appendChild(tr);
     });
@@ -590,9 +637,22 @@ function renderSuppliersTable() {
             <td class="text-muted small">${sup.address}</td>
             <td><span small">${sup.products}</span></td>
             <td class="text-end">
-                <button class="btn btn-sm btn-outline-secondary me-1" onclick="openSupplierModal(${sup.id})"><i class="fa-solid fa-pen"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="deleteSupplier(${sup.id})"><i class="fa-solid fa-trash"></i></button>
-            </td>
+    ${
+            isDemoUser()
+                ? ''
+                : `
+        <button class="btn btn-sm btn-outline-secondary me-1"
+                onclick="openSupplierModal(${s.id})">
+            <i class="fa-solid fa-pen"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-danger"
+                onclick="deleteSupplier(${s.id})">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+        `
+    }
+</td>
         `;
         tbody.appendChild(tr);
     });
@@ -868,10 +928,21 @@ function renderProductsTable(filteredProducts = null) {
             <td class="text-muted small">${sup}</td>
             <td>${reorder} units</td>
             <td>${statusBadge}</td>
-            <td class="text-end">
-                <button class="btn btn-sm btn-outline-secondary me-1" onclick="openProductModal(${p.id})"><i class="fa-solid fa-pen"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${p.id})"><i class="fa-solid fa-trash"></i></button>
-            </td>
+           <td class="text-end">
+    ${
+            isDemoUser()
+                ? ''
+                : `
+        <button class="btn btn-sm btn-outline-secondary me-1" onclick="openProductModal(${p.id})">
+            <i class="fa-solid fa-pen"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${p.id})">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+        `
+    }
+</td>
         `;
         tbody.appendChild(tr);
     });
@@ -1138,6 +1209,16 @@ function updateStockInSupplierSelect() {
 }
 document.getElementById('stock-in-form').addEventListener('submit', async function (e) {
     e.preventDefault();
+        if (isDemoUser()) {
+            showToast(
+                "Demo Mode",
+                "Stock In is disabled in Demo Mode.",
+                "warning"
+            );
+            return;
+        }
+
+    // Rest of your existing code...
 
     const prdId = parseInt(
         document.getElementById('stock-in-product').value
@@ -1246,6 +1327,18 @@ function showAvailableStockHint() {
 
 document.getElementById('stock-out-form').addEventListener('submit', async function (e) {
     e.preventDefault();
+
+    if (isDemoUser()) {
+        showToast(
+            "Demo Mode",
+            "Stock Out is disabled in Demo Mode.",
+            "warning"
+        );
+        return;
+    }
+
+    // Your existing code continues...
+
 
     const prdId = parseInt(
         document.getElementById('stock-out-product').value
@@ -1583,32 +1676,63 @@ function printReport() {
 function showToast(title, message, type = 'info') {
     const wrapper = document.getElementById('toast-wrapper');
     const toastId = 'toast-' + Date.now();
-    
+
     let icon = 'info-circle';
     if (type === 'success') icon = 'circle-check';
     else if (type === 'warning') icon = 'triangle-exclamation';
     else if (type === 'danger') icon = 'circle-xmark';
-    
-    const borderClass = `border-${type}`;
-    const headerColor = type === 'danger' ? 'text-danger' : (type === 'success' ? 'text-success' : 'text-primary');
+
+    let borderColor = "#3B82F6";
+
+    if (type === "success") borderColor = "#22C55E";
+    else if (type === "warning") borderColor = "#F59E0B";
+    else if (type === "danger") borderColor = "#EF4444";
+
+    let headerColor = 'text-info';
+
+    if (type === 'success') {
+        headerColor = 'text-success';
+    }
+    else if (type === 'warning') {
+        headerColor = 'text-warning';
+    }
+    else if (type === 'danger') {
+        headerColor = 'text-danger';
+    }
 
     const toastHTML = `
-        <div id="${toastId}" class="toast glass-card ${borderClass}" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #121829; border-width: 1px;">
-            <div class="toast-header border-bottom border-secondary" style="background-color: rgba(25, 33, 56, 0.4);">
-                <i class="fa-solid fa-${icon} ${headerColor} me-2"></i>
-                <strong class="me-auto">${title}</strong>
-                <small class="text-muted">just now</small>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body text-muted small">
-                ${message}
-            </div>
+    <div id="${toastId}"
+         class="toast glass-card"
+         role="alert"
+         aria-live="assertive"
+         aria-atomic="true"
+         style="background-color:#121829; border:1px solid ${borderColor};">
+
+        <div class="toast-header border-bottom border-secondary"
+             style="background-color: rgba(25,33,56,0.4);">
+
+            <i class="fa-solid fa-${icon} ${headerColor} me-2"></i>
+            <strong class="me-auto">${title}</strong>
+            <small class="text-muted">just now</small>
+
+            <button type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"></button>
         </div>
+
+        <div class="toast-body text-white small">
+            ${message}
+        </div>
+
+    </div>
     `;
-    
+
     wrapper.insertAdjacentHTML('beforeend', toastHTML);
+
     const toastEl = document.getElementById(toastId);
     const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+
     toast.show();
     
     // Cleanup DOM on hide
